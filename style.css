@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap");
+
+main {
+  font-family: "Mochiy Pop P One", sans-serif;
+  max-height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+  // scroll-snap-type: y mandatory;
+  // -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  z-index: 1;
+}
+
+section {
+  min-height: 100vh;
+  font-size: calc(1rem + 20vmin);
+  display: grid;
+  place-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+  scroll-snap-align: start;
+}
+
+.glitch {
+  background-color: #e88565;
+  & p {
+    position: relative;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 2px;
+    &::before {
+      content: attr(data-attr);
+      position: absolute;
+      left: -3px;
+      bottom: -8px;
+      color: rgba(17, 35, 120, 0.5);
+      text-shadow: -5px 0 rgba(17, 35, 120, 0.5);
+      overflow: hidden;
+      z-index: -1;
+      clip: rect(0px, 9999px, 110px, 0);
+    }
+    &::after {
+      content: attr(data-attr);
+      position: absolute;
+      left: 4px;
+      bottom: 8px;
+      color: rgba(204, 0, 0, 0.5);
+      text-shadow: -5px 0 rgba(204, 0, 0, 0.25);
+      overflow: hidden;
+      z-index: 1;
+      clip: rect(55px, 9999px, 200px, 0);
+    }
+  }
+}
+
+.slam {
+  background-color: #055a5b;
+  color: #e6e6e6;
+  p {
+    animation: slam 5s infinite;
+  }
+}
+
+@keyframes slam {
+  50% {
+    transform: translateY(-50px);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+  65% {
+    transform: translateY(0);
+  }
+}
+
+.break {
+  background-color: #2d1c46;
+  color: #ec2326;
+  p {
+    position: relative;
+    width: 6.5ch;
+    &::after {
+      content: attr(data-attr);
+      position: absolute;
+      right: 0;
+      color: white;
+      transform-origin: bottom left;
+      animation: break 5s infinite;
+    }
+  }
+}
+
+@keyframes break {
+  45% {
+    transform: rotate(125deg);
+    opacity: 1;
+  }
+  60% {
+    transform: rotate(125deg);
+    bottom: 0;
+  }
+  100% {
+    transform: rotate(125deg);
+    bottom: -100vh;
+  }
+}
+
+.shadow {
+  background-color: #f83439;
+  p {
+    position: relative;
+    color: transparent;
+    &::before,
+    &::after {
+      content: attr(data-attr);
+      position: absolute;
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 0 86%);
+      color: #321913;
+    }
+    &::before {
+      bottom: 0;
+    }
+    &::after {
+      transform: scale(1, -1) skew(45deg);
+      bottom: -70%;
+      opacity: 0.65;
+      left: -9%;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    font-size: calc(1rem + 12vmin);
+  }
+}
